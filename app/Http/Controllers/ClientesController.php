@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\cliente;
+use App\obra;
 use Redirect;
 use App\Http\Controllers\Controller;
 
@@ -16,14 +17,17 @@ class ClientesController extends Controller
 
     {
 
+        $obras = Obra::all();
         $clientes = cliente::get();
 
-        return view('clientes.lista', ['clientes' => $clientes]);
+        return view('clientes.lista', ['clientes' => $clientes,'obras' => $obras]);
     }
 
     public function novo()
     {
-        return view('clientes.formulario');
+
+        $obras = Obra::all();
+        return view('clientes.formulario',['obras' => $obras]);
     }
 
     public function salvar(Request $request)
@@ -41,9 +45,10 @@ class ClientesController extends Controller
     public function editar($id)
     {
 
+        $obras = Obra::all();
         $cliente = cliente::findOrFail($id);
 
-        return view('clientes.formulario',['cliente' => $cliente]);
+        return view('clientes.formulario',['cliente' => $cliente,'obras' => $obras]);
     }
 
     public function atualizar($id, Request $request)
@@ -51,8 +56,9 @@ class ClientesController extends Controller
         \Session::flash('mensagem_sucesso','Cliente cadastrado com sucesso');
 
         $cliente = cliente::findOrFail($id);
-
+        $obras = Obra::all();
         $cliente->update($request->all());
+
 
         \Session::flash('mensagem_sucesso','Cliente atualizado com sucesso');
 

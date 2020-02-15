@@ -1,0 +1,181 @@
+
+
+.nav-bar{
+ width: 100vw;
+ display: flex;
+}
+
+.nav-bar ul{
+  display: flex;
+  margin: 4vh 3vw 4vh  10vw;
+  list-style: none;
+}
+.carrinhos{
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #cccc;
+    box-shadow: -10px 13px 18px -16px rgba(0,0,0,0.75);
+  }
+
+
+div>img{
+    border: 1px solid #cccc;
+}
+
+
+form input[type="text"]{
+  border: none;
+  border-bottom: 1px solid rgb(119, 118, 118);
+}
+button{
+  padding: 10px 50px;
+  background-color: #6495ED;
+  font-size: 9px;
+  border: none;
+
+}
+div button{
+  margin: 0vh 0vw;
+}
+button:hover{
+  background-color: rgb(255, 254, 254);
+  box-shadow: 3px 3px 3px rgba(14, 12, 12, 0.5);
+}
+
+
+
+section> div:nth-child(2){
+  margin: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.conteudo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 48vw;
+  }
+  h1{
+    font-weight: normal;
+    font-family: 'Roboto';
+  }
+
+  article{
+
+   width: 90vw;
+   border: 1px solid #cccc;
+   background-color: white;
+   box-shadow: -10px 13px 18px -16px rgba(0,0,0,0.75);
+  }
+
+
+  section> div:nth-child(1){
+    height: 22vh;
+    display: flex;
+    margin-left: 2vw;
+    margin-top: 2vh;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+
+
+  div>img{
+    margin-top: 4vh ;
+    margin-bottom: 5vh ;
+  }
+
+
+  #tema{
+    margin-bottom:10px;
+    font-weight: bold;
+
+  }
+  .endereco{
+    margin: 1vw 5vh;
+  }
+  .endereco span{
+    font-size: 10px;
+  }
+
+  .rua{
+    display: flex;
+    margin: 1vh 1.5vw ;
+
+  }
+
+  .rua input[type="text"]{
+    border: none;
+    border-bottom: 1px solid #cccc ;
+    width: 20vw;
+    margin: 1vw;
+
+  }
+
+  label{
+    margin: 0 1vw 0 2vw;
+    font-size: 10px;
+  }
+  .compl{
+    display: flex;
+    margin-right: 1vw;
+  }
+
+  .compl input[type="text"]{
+    border: none;
+    border-bottom: 1px solid #cccc ;
+    width: 20vw;
+    margin: 1vw ;
+  }
+  .icones{
+    margin: 0 0 0 4vw;
+  }
+
+  .tres{
+    border: none;
+    height: 5vh;
+    margin-bottom: 2vw;
+    width: 2.7vw;
+  }
+
+  .confimacao{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .confimacao{
+    margin: 5vh 17vw 0 2vw;
+  }
+
+
+
+
+  
+
+
+
+
+
+
+
+
+

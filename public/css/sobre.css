@@ -1,0 +1,40 @@
+
+
+.carousel-item img{
+  object-fit: cover;
+  height: 98vh;
+}
+
+
+
+.conteudo{
+   display: grid;
+   grid-template-columns: 40vw auto;
+   grid-template-rows: auto auto ;
+}
+
+main{
+  margin-top: 0;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 3px;
+  border: 1px solid #ccc;
+}
+
+
+
+aside h2{
+  display: flex;
+  justify-content: center;
+  margin-bottom:10vh ;
+}
+
+p{
+  text-align: center;
+  font-size: 13px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+

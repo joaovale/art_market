@@ -9,6 +9,14 @@ class cliente extends Model
     protected $fillable = [
         'nome',
         'endereco',
-        'numero'
+        'numero',
+        'obra_id'
+
     ];
+
+    public function obra()
+{
+    return $this->belongsTo(obra::class);
+}
+
 }

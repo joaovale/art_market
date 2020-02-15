@@ -37,6 +37,19 @@
                     {!! Form::label('nome','Número')!!}
                     {!! Form::input('text','numero', null,['class' => 'form-control','placeholder' => 'Numero']) !!}
 
+                    {!! Form::label('obra_id','Obra')!!}
+                    <select name="obra_id" id="obra_id" class="form-control">
+
+                        @foreach ($obras as $obra)
+                            <option value="{{$obra->id}}" {{ $obra->id == $cliente -> obra_id ? 'selected' : ''}}>{{$obra->nome}} </option>
+                        @endforeach
+                    </select>
+
+
+
+
+
+
                     {!! Form::submit('Salvar',['class' => 'btn btn-primary']) !!}
 
                     {!!Form::close()!!}
@@ -48,4 +61,6 @@
     </div>
 </div>
 @endsection
+
+
 

@@ -1,0 +1,28 @@
+
+
+ .menu-perfil ul{
+   display: flex;
+   justify-content: center;
+
+   height: 10vh;
+ }
+ .menu-perfil ul li{
+  display: flex;
+  justify-content: center;
+  border: 1px solid #cccc;
+  margin-left: 0.1vw;
+  background-color: rgb(223, 223, 179);
+
+ }
+ .foto-perfil{
+   height: 20vh;
+   width: 10vw;
+   border-radius:100% ;
+   background-image: url('../img/icons/user.png');
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+
+ }
+
+

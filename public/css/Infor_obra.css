@@ -1,0 +1,17 @@
+
+.conteudo{
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  width: 100vw;
+  height: 58vw;
+}
+
+.principal{
+  height: 100vh;
+  width: 80vw;
+  border: 1px solid #cccc;
+  background-color: white;
+  box-shadow: -10px 13px 18px -16px rgba(0,0,0,0.75);
+ }
+

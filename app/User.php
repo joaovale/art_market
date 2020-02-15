@@ -36,4 +36,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function artista()
+    {
+        return $this -> hasOne(Artista::class);
+
+    }
+
+    public function obras()
+    {
+        return $this -> belongsToMany(Obra::class)->withTimestamps();
+
+    }public function telefones()
+    {
+        return $this -> hasMany(Telefone::class);
+    }
+
+
 }

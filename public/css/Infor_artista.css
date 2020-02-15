@@ -1,0 +1,16 @@
+
+.conteudo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 48vw;
+  }
+
+  .principal{
+    height: 82vh;
+    width: 80vw;
+    border: 1px solid #cccc;
+    background-color: white;
+    box-shadow: -10px 13px 18px -16px rgba(0,0,0,0.75);
+   }
