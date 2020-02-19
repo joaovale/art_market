@@ -33,6 +33,7 @@
 
                   <table class="table">
 
+                  <th>Usuário</th>
                   <th>Numero</th>
                   <th>Data Pedido</th>
                   <th>Data Entrega</th>
@@ -49,6 +50,7 @@
 
                       <tr>
 
+                        <td>{{$pedido->user->name}}</td>
                         <td>{{$pedido -> id}}</td>
                         <td>{{$pedido -> data_pedido}}</td>
                         <td>{{$pedido -> data_entrega}}</td>

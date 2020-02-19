@@ -25,6 +25,7 @@ class CreateEnderecosTable extends Migration
             $table->string('pais',45);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
         });
     }
 

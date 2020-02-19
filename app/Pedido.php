@@ -11,20 +11,15 @@ class Pedido extends Model
         'data_entrega',
         'frete',
         'entrega',
-        'user_id',
-        'item_pedido_id'
+        'user_id'
 
 ];
 
-// public function user()
-//     {
-//         return $this -> belongsTo(user::class);
-//     }
 
-
-public function users()
+public function user()
     {
-        return $this -> belongsToMany(User::class);
+        return $this -> belongsTo(User::class);
     }
+
 }
 

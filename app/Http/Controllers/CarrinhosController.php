@@ -18,13 +18,12 @@ use App\Http\Controllers\Controller;
 
 class CarrinhosController extends Controller
 {
-   /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+
+
+        public function __construct()
+        {
+            $this->middleware('auth');
+        }
 
         // Commandos do relacionamento many to many - aula 47 e 48
 
@@ -45,7 +44,7 @@ class CarrinhosController extends Controller
             // para o array de obras relacionar o user definido incluir o relacionamento apenas com as obras 3 e 4
             // excluindo todos os outros relacionamentos do user definido
 
-                // $user->obras()-> sync([1,2]);
+                // $user->obras()-> sync([3,4]);
 
             //  para o array de obras relacionar o user definido apenas incluir o relacionamento com as obras 3 e 4
             // apenas se o relacionamento ainda nao existe e manter todos os outros relacionamentos do user definido
@@ -55,174 +54,72 @@ class CarrinhosController extends Controller
 
         // dd($user);
 
+        public function index()
+        {
 
         $user_login_id = auth()->user()->id;
         $user = auth()->user();
 
-        $obra_user = Obra_user::where('user_id', $user_login_id)->get();
-
-        dd($obra_user);
-
-
-        $obras= Obra::where('artista_id', $user_login_id)->get();
+        $obras = User::find($user_login_id)->obras()->get();
 
        $artistas = artista::all();
-
        $categorias = Categoria::all();
        $estilos = Estilo::all();
 
-
-
-        return view('carrinhos.index', compact('user'),['obras' => $obras]);
+        return view('carrinhos.index', compact('user','categorias','artistas'),['obras' => $obras]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+
+
+    public function enviar_carrinho($obra)
     {
+        $obras = Obra::findOrFail($obra);
+        $obra = $obras->id;
 
-
-
-        // // $artista = Artista::all();
-
-        // $artista = DB::table('artistas')->where('artista_id', 1)->first();
-
-        // dd($artista);
-
-        // return view('obras.create',['artista' => $artista])
-
-        $categorias = Categoria::all();
-
-        $estilos = Estilo::all();
-
+        $user_login_id = auth()->user()->id;
         $user = auth()->user();
 
-        $artistas = Artista::all();
+        $user->obras()-> syncWithoutDetaching([$obra]);
 
-        $obra = new \App\Obra([
-
-        ]);
-        return view('obras.create',compact('obra','categorias', 'artistas', 'user', 'estilos' ));
-
-    }
+        // $user->obras()-> attach($obra);
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(obra $obra)
-    {
-         $data = $this->validateRequest();
-
-        $path = request()->file('foto')->store('public');
-
-        $data['foto'] = Storage::disk('public')->url(basename($path));
-
-       $obra = obra::create($data);
-
-        \Session::flash('mensagem_sucesso','Obra cadastrado com sucesso');
-
-        return Redirect('obras/create');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(obra $obra)
-    {
-
-        $artistas = Artista::all();
-
-
-        return view('obras.show', compact('obra','categoria', 'artistas', 'estilo'  ));
-
-
+        return Redirect('/obras');
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Obra $obra) {
+    public function retirar_carrinho($obra) {
 
+        $obras = Obra::findOrFail($obra);
+        $obra = $obras->id;
+
+        $user_login_id = auth()->user()->id;
         $user = auth()->user();
 
-        $categorias = Categoria::all();
+        $user->obras()-> detach([$obra]);
 
-        $estilos = Estilo::all();
 
-        $artistas = Artista::all();
-
-        return view('obras.edit', compact('obra','categorias', 'artistas', 'user',  'estilo' , ['obra' => $obra],['user' => $user]));
+        return Redirect('/carrinhos');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Obra $obra)
-    {
+    public function criarPedido()
+        {
 
-        $data = $this->validateRequest();
+        $user_login_id = auth()->user()->id;
+        $user = auth()->user();
 
-        // $path = request()->file('foto')->store('public');
+        $obras = User::find($user_login_id)->obras()->get();
 
-        // $data['foto'] = Storage::disk('public')->url(basename($path));
 
-        $obra -> update($data);
+       $artistas = artista::all();
+       $categorias = Categoria::all();
+       $estilos = Estilo::all();
 
-        return redirect('obras/'. $obra->id);
-
+        return redirect()->route('pedidos.create',['obras' => $obras]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(obra $obra)
-    {
-        $obra->delete();
 
-        return redirect('obras');
-    }
-
-    private function validateRequest()
-    {
-
-        return request()->validate([
-
-            'nome'=> 'required|min:3',
-            'sobre'=> 'required',
-            'preco'=> 'required',
-            'tamanho'=> 'required',
-            'data_criacao'=> 'required',
-            'estoque' => 'required',
-            'artista_id' => 'required',
-            'categoria_id'=> 'required',
-            'estilo_id'=> 'required',
-            'foto'=>  'required',
-
-       ]);
-
-
-    }
 }
 
 

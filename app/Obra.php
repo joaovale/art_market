@@ -19,23 +19,16 @@ class Obra extends Model
         'estoque',
         'artista_id',
         'categoria_id',
-        'estilo_id'
+        'estilo_id',
+        'itemPedido_id'
 
 ];
 
-// public function user()
-//     {
-//         return $this -> belongsTo(user::class);
-//     }
 
-    public function carrinho_has_obra()
-    {
-        return $this -> belongsTo('App\Obra');
-    }
 
     public function artista()
     {
-        return $this -> belongsTo('App\Artista');
+        return $this -> belongsTo(Artista::class);
     }
 
     public function categoria()
@@ -46,6 +39,11 @@ class Obra extends Model
     public function estilo()
     {
         return $this -> belongsTo(Estilo::class);
+    }
+
+    public function itemDoPedido()
+    {
+        return $this -> belongsTo(ItemDoPedido::class);
     }
 
     public function users()

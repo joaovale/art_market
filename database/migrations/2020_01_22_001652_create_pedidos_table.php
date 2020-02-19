@@ -20,8 +20,8 @@ class CreatePedidosTable extends Migration
             $table->decimal('frete',7,2);
             $table->string('entrega',10);
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('item_pedido_id');
             $table->timestamps();
+
 
         });
     }

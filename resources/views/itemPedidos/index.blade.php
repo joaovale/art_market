@@ -21,8 +21,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                Artistas
-                <a class="float-right" href="{{url('artistas/create')}}">Cadastrar novo artista</a>
+                Pedido
+                <a class="float-right" href="{{url('pedidos/create')}}">Cadastrar novo item</a>
                 </div>
                 <div class="card-body">
                 @if(Session::has('mensagem_sucesso'))
@@ -32,27 +32,28 @@
                 @endif
 
                   <table class="table">
-                  <th>Login</th>
-                  <th>Nome artistico</th>
-                  <th>Portfolio</th>
+
+                  <th>Valor Unitário</th>
+                  <th>Quantidade</th>
 
 
                     <tbody>
 
-                    @foreach($artistas as $artista)
+                    @foreach($itemPedidos as $itemPedido)
 
                       <tr>
 
-                        <td>{{$artista -> user -> name}}</td>
-                        <td>{{$artista -> nome_artista}}</td>
-                        <td>{{$artista-> portfolio}}</td>
-                        <td>
-                            <a href= "/artistas/{{$artista -> id}}/edit" class="btn btn-primary btn-sm">Editar</a>
+                        <td>{{$itemPedido -> valor_unitario}}</td>
+                        <td>{{$itemPedido -> quantidade}}</td>
 
-                            {!! Form::open(['method' => 'DELETE', 'url' => '/artistas/'.$artista->id, 'style' => 'display: inline;'])!!}
+
+                        <td>
+                            <a href= "/itemPedidos/{{$itemPedido -> id}}/edit" class="btn btn-primary btn-sm">Editar</a>
+                            <a href= "/itemPedidos/{{$itemPedido -> id}}" class="btn btn-primary btn-sm">Show</a>
+
+                            {!! Form::open(['method' => 'DELETE', 'url' => '/itemPedidos/'.$itemPedido->id, 'style' => 'display: inline;'])!!}
 
                                 <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
-
 
                             {!! Form::close()!!}
 

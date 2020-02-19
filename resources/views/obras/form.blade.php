@@ -3,15 +3,16 @@
 @if(!Request::is('*/edit'))
            <div class="form-group ">
                 <label class="font-weight-bold"> Proprietários --->    {{$user->name}}</label>
-                <input type="hidden" name="user_id" value="{{$user->id }}" class="form-control py-3">
+                <input type="hidden" name="artista_id" value="{{$user->id }}" class="form-control py-3">
+                <input type="hidden" name="itemPedido_id" value="{{$user->id }}" class="form-control py-3">
                 <div>{{ $errors->first('user_id')}}</div>
             </div>
 
 @else
 
             <input type="hidden" name="id" value="{{$obra->id }}" class="form-control py-3">
-            <!-- <input type="hidden" name="artista_id" value="{{$obra->artista_id }}" class="form-control py-3"> -->
-
+            <input type="hidden" name="artista_id" value="{{$obra->artista_id }}" class="form-control py-3">
+            <input type="hidden" name="itemPedido_id" value="{{$user->id }}" class="form-control py-3">
  @endif
 
         <div class="row">

@@ -30,26 +30,15 @@
     <div class="row justify-content-center">
     <div class="col-8">
 
-    <!-- Mostra dados da Obra-->
+    <!-- Mostra dados da pedido-->
 
     <div class="card" style="width: 18rem">
-    <img src="{{$obra->foto}}" alt="sem foto" class= "img-thumbnail">
   <div class="card-body">
-    <p><strong>Nome:  </strong>{{ $obra->nome }}</p>
-    <p><strong>Nome do artista:  </strong>{{ $obra->artista->nome_artista }}</p>
-    <p><strong>Categoria:  </strong>{{ $obra->categoria->nome }}</p>
-    <p><strong>Estilo:  </strong>{{ $obra->estilo->nome }}</p>
-    <p class= "card-text" ><strong>Sobre:  </strong>{{ $obra->sobre }}</p>
-    <p><strong>Preco:  </strong>{{ $obra->preco }}</p>
-    <p><strong>Data de criação:  </strong>{{ $obra->data_criacao }}</p>
-    <a href="/obras/{{ $obra->id}}/edit" class="card-link btn btn-primary">Editar</a>
-    <form action="/obras/{{ $obra->id }}" method="POST" >
+    <p><strong>Valor unitário:  </strong>{{ $itemPedido->id }}</p>
+    <p><strong>Quantidade:  </strong>{{ $pedido->data_pedido }}</p>
 
-                        @method('DELETE')
-                        @csrf
-                        <button class="card-link btn btn-danger float-right" type="submit">Deletar</button>
+    <a href="/itemPedidos" class="card-link btn btn-primary">Voltar</a>
 
-    </form>
   </div>
 </div>
 

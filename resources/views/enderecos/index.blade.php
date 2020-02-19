@@ -33,6 +33,7 @@
 
                   <table class="table">
 
+                  <th>Login</th>
                   <th>CEP</th>
                   <th>Rua</th>
                   <th>Numero</th>
@@ -50,7 +51,7 @@
                     @foreach($enderecos as $endereco)
 
                       <tr>
-
+                        <td>{{$endereco -> user -> name}}</td>
                         <td>{{$endereco -> cep}}</td>
                         <td>{{$endereco -> rua}}</td>
                         <td>{{$endereco -> numero}}</td>

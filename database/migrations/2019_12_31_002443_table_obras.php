@@ -25,10 +25,8 @@ class TableObras extends Migration
             $table->unsignedBigInteger('artista_id');
             $table->unsignedBigInteger('estilo_id');
             $table->unsignedBigInteger('categoria_id');
+            $table->unsignedBigInteger('itemPedido_id')->nullable($value = true);
             $table->timestamps();
-
-
-
 
         });
     }

@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 use App\user;
 use App\obra;
+use App\obra_user;
+use App\itemPedido;
 use App\artista;
 use App\categoria;
 use App\estilo;
+use App\carrinho;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Redirect;
 use App\Http\Controllers\Controller;
@@ -15,6 +20,11 @@ use App\Http\Controllers\Controller;
 
 class ObrasController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,25 +33,37 @@ class ObrasController extends Controller
     public function index()
     {
 
-       $artistas = artista::all();
+    //    $artistas = artista::all();
 
 
 
        $obras = obra::all();
 
-       $categorias = Categoria::all();
-       $estilos = Estilo::all();
-
-    //    $users = DB::table('obras')
-    //         ->leftJoin('artistas', 'users.id', '=', 'artista_id')
-    //         ->get();
-
-    //    $artistas= DB::table('artistas')->get();
-
-    //    $artista = DB::table('artistas')->where('id', 1)->first();
 
         return view('obras.index', ['obras' => $obras]);
     }
+
+    public function select_categoria($id)
+    {
+
+        $categorias = Categoria::all();
+
+        $categorias= DB::table('categorias')->where('id', $id)->first();
+        $categoria_id = $categorias->id;
+
+
+        $itemPedido= ItemPedido::all();
+        $obras = DB::table('obras')->where('categoria_id', $categoria_id)->get();
+
+        $estilos = Estilo::all();
+
+
+       $artistas = artista::all();
+
+
+        return view('obras.index', compact('user','categorias','artistas','estilo'),['obras' => $obras]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -72,7 +94,7 @@ class ObrasController extends Controller
         $obra = new \App\Obra([
 
         ]);
-        return view('obras.create',compact('obra','categorias', 'artistas', 'user', 'estilos' ));
+        return view('obras.create',compact('obra','categorias', 'artistas', 'user', 'estilos', 'itemPedido' ));
 
     }
 
@@ -184,6 +206,7 @@ class ObrasController extends Controller
             'artista_id' => 'required',
             'categoria_id'=> 'required',
             'estilo_id'=> 'required',
+            'itemPedido_id'=> 'required',
             'foto'=>  'required',
 
        ]);

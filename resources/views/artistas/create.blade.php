@@ -73,13 +73,6 @@
                     {!! Form::label('mais_info','Mais informacoes')!!}
                     {!! Form::input('text','mais_info', null,['class' => 'form-control','placeholder' => 'Mais informacoes']) !!}
 
-                    {!! Form::label('compart_tel','Compartilhar telefone (s/n)')!!}
-                    {!! Form::input('text','compart_tel', null,['class' => 'form-control','placeholder' => 'Como partilhar telefone (s/n)']) !!}
-
-                    {!! Form::label('compart_email','Compartilhar E-mail (s/n)')!!}
-                    {!! Form::input('text','compart_email', null,['class' => 'form-control','placeholder' => 'Como partilhar E-mail (s/n)']) !!}
-
-
                     </select>
 
 

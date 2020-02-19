@@ -16,44 +16,43 @@
 
 @section('content')
 
-<
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Editando o pedido: {{ $itemPedido->numero }}
+                    <a class="float-right" href="/itemPedidos">Listar itemPedidos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div class="container">
 
-<!-- @if(Session::has('mensagem_sucesso'))
+@if(Session::has('mensagem_sucesso'))
 
             <div class="alert alert-success"> {{ Session::get('mensagem_sucesso')}}</div>
 
-@endif -->
+@endif
 
     <div class="row justify-content-center">
     <div class="col-8">
 
-    <!-- Mostra dados da Obra-->
+    <!-- porque nao suporta o metodo POST se store é post-->
+    
+        <form action="/itemPedidos/{{ $itemPedido->id }}" method="POST"  enctype="multipart/form-data">
 
-    <div class="card" style="width: 18rem">
-    <img src="{{$obra->foto}}" alt="sem foto" class= "img-thumbnail">
-  <div class="card-body">
-    <p><strong>Nome:  </strong>{{ $obra->nome }}</p>
-    <p><strong>Nome do artista:  </strong>{{ $obra->artista->nome_artista }}</p>
-    <p><strong>Categoria:  </strong>{{ $obra->categoria->nome }}</p>
-    <p><strong>Estilo:  </strong>{{ $obra->estilo->nome }}</p>
-    <p class= "card-text" ><strong>Sobre:  </strong>{{ $obra->sobre }}</p>
-    <p><strong>Preco:  </strong>{{ $obra->preco }}</p>
-    <p><strong>Data de criação:  </strong>{{ $obra->data_criacao }}</p>
-    <a href="/obras/{{ $obra->id}}/edit" class="card-link btn btn-primary">Editar</a>
-    <form action="/obras/{{ $obra->id }}" method="POST" >
+        @method('PATCH')
+        @include('itemPedidos.form')
 
-                        @method('DELETE')
-                        @csrf
-                        <button class="card-link btn btn-danger float-right" type="submit">Deletar</button>
 
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
-
-
+</div>
 
 @endsection
 

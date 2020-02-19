@@ -22,6 +22,8 @@
             <div class="card">
                 <div class="card-header">
                 Carrinho de {{$user->name}}
+                <a class="float-right" href="{{route('pedidos.create')}}">Comprar</a>
+                <a class="float-right" href="">/_____________________/<div class=""></div></a>
                 <a class="float-right" href="{{url('/obras')}}">Voltar</a>
                 </div>
             </div>
@@ -49,9 +51,11 @@
               <p class="card-text">Autor:   {{$obra -> artista_id}}</p>
               <p class="card-text">Dimensões: {{$obra ->  tamanho}}</p>
               <p class="card-text">Preço R$ {{$obra ->  preco}}</p>
+              <p class="card-text">Categoria:  {{$obra ->  categoria -> nome}}</p>
+              <p class="card-text">artista:  {{$obra ->  artista-> nome_artista}}</p>
               <div class="d-flex flex-row-reverse">
                 <a class="icons" href="compras.html">
-                <a href="/obras/{{$obra->id}}" class="card-link btn btn-primary">Detahes</a>
+                <a href="carrinhos/{{$obra->id}}/retirar" class="card-link btn btn-primary">Retirar</a>
                 <img class="icons" src="img/icons/mais bolça.svg" width="23px" alt="bolça">
                 </a>
                 </li>

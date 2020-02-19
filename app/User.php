@@ -40,6 +40,16 @@ class User extends Authenticatable
     public function artista()
     {
         return $this -> hasOne(Artista::class);
+    }
+
+    public function telefones()
+    {
+        return $this -> belongsTo(Telefone::class);
+    }
+
+    public function pedidos()
+    {
+        return $this -> belongsTo(Pedido::class);
 
     }
 
@@ -47,10 +57,5 @@ class User extends Authenticatable
     {
         return $this -> belongsToMany(Obra::class)->withTimestamps();
 
-    }public function telefones()
-    {
-        return $this -> hasMany(Telefone::class);
     }
-
-
 }

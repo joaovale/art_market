@@ -7,28 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 Use App\Pedido;
 Use App\itemDoPedido;
 use App\User;
+use App\Obra;
 use Illuminate\Support\Facades\DB;
 use Redirect;
 use App\Http\Controllers\Controller;
 
-class PedidosController extends Controller
+
+class ItemDoPedidosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
 
-
-    $pedidos = Pedido::all();
-
+    $itemDoPedidos = itemDoPedido::all();
 
 
-
-        return view('pedidos.index', compact('pedidos', 'users' ));
+        return view('itemDoPedidos.index');
     }
 
     /**
@@ -38,6 +32,12 @@ class PedidosController extends Controller
      */
     public function create()
     {
+
+        $user_login_id = auth()->user()->id;
+        $user = auth()->user();
+
+        $obras = User::find($user_login_id)->obras()->get();
+
 
         $pedido = new \App\Pedido([
             'data_pedido' => now(),
@@ -50,18 +50,12 @@ class PedidosController extends Controller
 
             $pedido -> save();
 
-            dd($pedido->id);
 
+        $itemDoPedido = new \App\itemDoPedido([
 
-        return redirect()->route('itemPedidos.create', compact('pedido'));
+        ]);
 
-        // $user = auth()->user();
-
-        // $pedido = new \App\Pedido([
-
-        // ]);
-
-        // return view('pedidos.create',compact('pedido', 'user' ));
+        return view('itemDoPedidos.create',compact('itemDoPedido', 'obras', 'pedido' ));
 
     }
 
@@ -72,18 +66,16 @@ class PedidosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(pedido $pedido)
+    public function store(itemDoPedido $itemDoPedido)
     {
-        $data = $pedido;
-        dd($data);
 
-        $pedido = Pedido::create($data);
+        $data = $this->validateRequest();
 
-        dd($pedido);
+       $itemDoPedido = itemDoPedido::create($data);
 
-        \Session::flash('mensagem_sucesso','pedido cadastrado com sucesso');
+        \Session::flash('mensagem_sucesso','itemDoPedido cadastrado com sucesso');
 
-        // return Redirect('itemDoPedidos/create');
+        return Redirect('itemDoPedidos/create');
     }
 
     /**
@@ -92,18 +84,16 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(pedido $pedido)
+    public function show(itemDoPedido $itemDoPedido)
     {
 
         $user_login_id = auth()->user()->id;
         $user = auth()->user();
 
-        $pedidos= pedido::where('user_id', $user_login_id)->get();
+        $itemDoPedidos= itemDoPedido::where('user_id', $user_login_id)->get();
 
 
-
-
-        return view('pedidos.show', compact('pedido', 'user' ));
+        return view('itemDoPedidos.show', compact('itemDoPedido' ));
 
 
 
@@ -115,12 +105,12 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(pedido $pedido) {
+    public function edit(itemDoPedido $itemDoPedido) {
 
         $user = auth()->user();
 
 
-        return view('pedidos.edit',['pedido' => $pedido],['user' => $user]);
+        return view('itemDoPedidos.edit',['itemDoPedido' => $itemDoPedido],['user' => $user]);
     }
 
     /**
@@ -130,14 +120,14 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(pedido $pedido)
+    public function update(itemDoPedido $itemDoPedido)
     {
 
         $data = $this->validateRequest();
 
-        $pedido -> update($data);
+        $itemDoPedido -> update($data);
 
-        return redirect('/pedidos');
+        return redirect('/itemDoPedidos');
 
     }
 
@@ -147,11 +137,11 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pedido $pedido)
+    public function destroy(itemDoPedido $itemDoPedido)
     {
-        $pedido->delete();
+        $itemDoPedido->delete();
 
-        return redirect('pedidos');
+        return redirect('itemDoPedidos');
     }
 
     private function validateRequest()
@@ -160,14 +150,12 @@ class PedidosController extends Controller
         return request()->validate([
 
 
-            'data_pedido' => 'required',
-            'data_entrega' => 'required',
-            'frete' => 'required',
-            'entrega' => 'required',
-            'user_id' => 'required'
+            'valor_unitario' => 'required',
+            'quantidade' => 'required',
+            'pedido_id' => 'required',
+            'obra_id' => 'required',
 
        ]);
-
 
     }
 }

@@ -20,6 +20,7 @@ class CreateTelefonesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
+
         });
     }
 

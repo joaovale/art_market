@@ -15,18 +15,13 @@ class Endereco extends Model
         'cidade',
         'estado',
         'pais',
-       'user_id'
+        'user_id'
 
 ];
-
-// public function user()
-//     {
-//         return $this -> belongsTo(user::class);
-//     }
 
 
 public function users()
     {
-        return $this -> belongsToMany(User::class);
+        return $this -> belongTo(User::class);
     }
 }

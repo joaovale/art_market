@@ -4,8 +4,7 @@
                         <div class="form-group ">
                                 <label class="font-weight-bold"> Usuario --->    {{$user->name}}   {{$user->id}}</label>
                                 <input type="hidden" name="user_id" value="{{$user->id }}" class="form-control py-3">
-                                <input type="hidden" name="item_pedido_id" value="{{$user->id }}" class="form-control py-3">
-                                <div>{{ $errors->first('item_pedido_id')}}</div>
+                                <div>{{ $errors->first('itemPedido_id')}}</div>
                             </div>
 
 
@@ -14,7 +13,7 @@
 
                             <input type="hidden" name="id" value="{{$pedido->id }}" class="form-control py-3">
                             <input type="hidden" name="user_id" value="{{$pedido->user_id}}" class="form-control py-3">
-                            <input type="hidden" name="item_pedido_id" value="{{$pedido->item_pedido_id}}" class="form-control py-3">
+
 
 
                 @endif

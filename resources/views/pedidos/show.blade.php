@@ -34,7 +34,8 @@
 
     <div class="card" style="width: 18rem">
   <div class="card-body">
-    <p><strong>Numero do Pedido:  </strong>{{ $pedido->id }}</p>
+    <p><strong>Usuário:  </strong>{{ $pedido -> user-> name }}</p>
+    <p><strong>Numero do Pedido:  </strong>{{ $pedido-> id }}</p>
     <p><strong>Data do Pedido:  </strong>{{ $pedido->data_pedido }}</p>
     <p><strong>Data da Entrega:  </strong>{{ $pedido->data_entrega}}</p>
     <p><strong>Valor do frete:  </strong>{{ $pedido->frete }}</p>

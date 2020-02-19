@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarrinhoHasObrasTable extends Migration
+class CreateItemDoPedidosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateCarrinhoHasObrasTable extends Migration
      */
     public function up()
     {
-        Schema::create('carrinho_has_obras', function (Blueprint $table) {
+        Schema::create('item_do_pedidos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('carrinho_id');
+            $table->decimal('valor_unitario',7,2);
+            $table->integer('quantidade');
+            $table->unsignedBigInteger('pedido_id');
             $table->unsignedBigInteger('obra_id');
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ class CreateCarrinhoHasObrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carrinho_has_obras');
+        Schema::dropIfExists('item_do_pedidos');
     }
 }

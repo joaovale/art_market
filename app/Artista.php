@@ -24,19 +24,13 @@ class Artista extends Model
     public function getcompart_telAttribute($attribute)
     {
         return [
-            1 =>'Compartilhar telefone',
-            0 =>'Não compartilhar telefone',
+
         ][$attribute];
     }
 
     public function user()
     {
         return $this -> belongsTo(User::class);
-    }
-
-    public function obras()
-    {
-        return $this -> hasMany('App\Obra');
     }
 
 

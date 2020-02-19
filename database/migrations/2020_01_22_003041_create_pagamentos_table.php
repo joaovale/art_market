@@ -15,9 +15,9 @@ class CreatePagamentosTable extends Migration
     {
         Schema::create('pagamentos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('n_carta',12);
-            $table->string('nome',10);
-            $table->string('codigo_seguranca',10);
+            $table->string('n_cartao',20);
+            $table->string('nome',50);
+            $table->string('codigo_seguranca',5);
             $table->unsignedBigInteger('pedido_id');
             $table->timestamps();
         });

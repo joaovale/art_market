@@ -21,8 +21,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                Artistas
-                <a class="float-right" href="{{url('artistas/create')}}">Cadastrar novo artista</a>
+                Pagamentos
+                <a class="float-right" href="{{url('pagamentos/create')}}">Cadastrar novo pagamento</a>
                 </div>
                 <div class="card-body">
                 @if(Session::has('mensagem_sucesso'))
@@ -32,27 +32,32 @@
                 @endif
 
                   <table class="table">
-                  <th>Login</th>
-                  <th>Nome artistico</th>
-                  <th>Portfolio</th>
+     
+                  <th>Número do Cartão</th>
+                  <th>Nome </th>
+                  <th>Código de Segurança</th>
 
+                    <!-- <th>Id</th> -->
+                    <!-- <th>Ações</th> -->
 
                     <tbody>
 
-                    @foreach($artistas as $artista)
+                    @foreach($pagamentos as $pagamento)
 
                       <tr>
 
-                        <td>{{$artista -> user -> name}}</td>
-                        <td>{{$artista -> nome_artista}}</td>
-                        <td>{{$artista-> portfolio}}</td>
-                        <td>
-                            <a href= "/artistas/{{$artista -> id}}/edit" class="btn btn-primary btn-sm">Editar</a>
+                        <td>{{$pagamento -> n_cartao}}</td>
+                        <td>{{$pagamento -> nome}}</td>
+                        <td>{{$pagamento -> codigo_seguranca}}</td>
 
-                            {!! Form::open(['method' => 'DELETE', 'url' => '/artistas/'.$artista->id, 'style' => 'display: inline;'])!!}
+
+                        <!-- <td>{{$pagamento-> id}}</td> -->
+                        <td>
+                            <a href= "/pagamentos/{{$pagamento -> id}}/edit" class="btn btn-primary btn-sm">Editar</a>
+
+                            {!! Form::open(['method' => 'DELETE', 'url' => '/pagamentos/'.$pagamento->id, 'style' => 'display: inline;'])!!}
 
                                 <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
-
 
                             {!! Form::close()!!}
 

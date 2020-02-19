@@ -18,8 +18,6 @@ class CreateArtistasTable extends Migration
             $table->string('nome_artista');
             $table->longText('portfolio');
             $table->longText('mais_info');
-            $table->integer('compart_tel');
-            $table->integer('compart_email');
             $table->unsignedBigInteger('user_id')->index();
             $table->timestamps();
 

@@ -21,8 +21,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                Artistas
-                <a class="float-right" href="{{url('artistas/create')}}">Cadastrar novo artista</a>
+                itemDoPedidos
+                <a class="float-right" href="{{url('itemDoPedidos/create')}}">Cadastrar novo itemDoPedido</a>
                 </div>
                 <div class="card-body">
                 @if(Session::has('mensagem_sucesso'))
@@ -30,29 +30,37 @@
                         <div class="alert alert-success"> {{ Session::get('mensagem_sucesso')}}</div>
 
                 @endif
-
+               
                   <table class="table">
-                  <th>Login</th>
-                  <th>Nome artistico</th>
-                  <th>Portfolio</th>
 
+                  <th>Pedido</th>
+                  <th>Obra </th>
+                  <th>Quantidade</th>
+                  <th>Valor Unitário</th>
+
+                    <!-- <th>Id</th> -->
+                    <!-- <th>Ações</th> -->
 
                     <tbody>
 
-                    @foreach($artistas as $artista)
+                    @foreach($itemDoPedidos as $itemDoPedido)
 
                       <tr>
 
-                        <td>{{$artista -> user -> name}}</td>
-                        <td>{{$artista -> nome_artista}}</td>
-                        <td>{{$artista-> portfolio}}</td>
-                        <td>
-                            <a href= "/artistas/{{$artista -> id}}/edit" class="btn btn-primary btn-sm">Editar</a>
+                        <td>{{$itemDoPedido -> pedido_id}}</td>
+                        <td>{{$itemDoPedido -> obra_id}}</td>
+                        <td>{{$itemDoPedido -> quantidade}}</td>
+                        <td>{{$itemDoPedido -> valor_unitario}}</td>
 
-                            {!! Form::open(['method' => 'DELETE', 'url' => '/artistas/'.$artista->id, 'style' => 'display: inline;'])!!}
+
+
+                        <!-- <td>{{$itemDoPedido-> id}}</td> -->
+                        <td>
+                            <a href= "/itemDoPedidos/{{$itemDoPedido -> id}}/edit" class="btn btn-primary btn-sm">Editar</a>
+
+                            {!! Form::open(['method' => 'DELETE', 'url' => '/itemDoPedidos/'.$itemDoPedido->id, 'style' => 'display: inline;'])!!}
 
                                 <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
-
 
                             {!! Form::close()!!}
 

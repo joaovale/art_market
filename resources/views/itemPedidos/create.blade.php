@@ -16,44 +16,52 @@
 
 @section('content')
 
-<
-
-
-<div class="container">
-
-<!-- @if(Session::has('mensagem_sucesso'))
-
-            <div class="alert alert-success"> {{ Session::get('mensagem_sucesso')}}</div>
-
-@endif -->
-
+<div class="container d-flex flex-column ">
     <div class="row justify-content-center">
-    <div class="col-8">
-
-    <!-- Mostra dados da Obra-->
-
-    <div class="card" style="width: 18rem">
-    <img src="{{$obra->foto}}" alt="sem foto" class= "img-thumbnail">
-  <div class="card-body">
-    <p><strong>Nome:  </strong>{{ $obra->nome }}</p>
-    <p><strong>Nome do artista:  </strong>{{ $obra->artista->nome_artista }}</p>
-    <p><strong>Categoria:  </strong>{{ $obra->categoria->nome }}</p>
-    <p><strong>Estilo:  </strong>{{ $obra->estilo->nome }}</p>
-    <p class= "card-text" ><strong>Sobre:  </strong>{{ $obra->sobre }}</p>
-    <p><strong>Preco:  </strong>{{ $obra->preco }}</p>
-    <p><strong>Data de criação:  </strong>{{ $obra->data_criacao }}</p>
-    <a href="/obras/{{ $obra->id}}/edit" class="card-link btn btn-primary">Editar</a>
-    <form action="/obras/{{ $obra->id }}" method="POST" >
-
-                        @method('DELETE')
-                        @csrf
-                        <button class="card-link btn btn-danger float-right" type="submit">Deletar</button>
-
-    </form>
-  </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                Cadastro de itemPedidos
+                <a class="float-right" href="{{url('/pedidos')}}">Lista de Itens do pedido</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
+
+<div class="container d-flex flex-column">
+
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @if(Session::has('mensagem_sucesso'))
+
+                    <div class="alert alert-success"> {{ Session::get('mensagem_sucesso')}}</div>
+
+            @endif
+
+
+                <div class="conteudo mb-5 mt-5">
+
+                    <div class="principal col-md-8">
+                        <div class="row justify-content-center">
+
+                            <form action="/itemPedidos/store" method="POST" enctype="multipart/form-data" class="col-12">
+
+                                @method('POST')
+                                @include('itemPedidos.form')
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 

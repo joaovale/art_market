@@ -13,6 +13,11 @@ use App\Http\Controllers\Controller;
 
 class ArtistasController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -84,12 +89,9 @@ class ArtistasController extends Controller
     public function edit($id)
     {
 
-
-
-
-        $user = DB::table('users')->where('id', 1)->first();
-
         $artista = artista::findOrFail($id);
+
+        $user = DB::table('users')->where('id', $artista->user_id)->first();
 
         return view('artistas.create',['artista' => $artista ,'user' => $user]);
     }

@@ -3,28 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Endereco;
-use App\User;
+use Illuminate\Database\Eloquent\Model;
+use App\itemPedido;
+use App\obra;
+use App\pedido;
+use App\carrinho;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Redirect;
 use App\Http\Controllers\Controller;
 
-class EnderecosController extends Controller
+class ItemPedidosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
 
-    $enderecos = Endereco::all();
+    $itemPedidos = ItemPedido::all();
 
-    ($enderecos);
 
-        return view('enderecos.index', ['enderecos' => $enderecos]);
+        return view('itemPedidos.index');
     }
 
     /**
@@ -36,12 +34,11 @@ class EnderecosController extends Controller
     {
 
 
-        $user = auth()->user();
-
-        $endereco = new \App\Endereco([
+        $itemPedido = new \App\itemPedido([
 
         ]);
-        return view('enderecos.create',compact('endereco', 'user' ));
+
+        return view('itemPedidos.create',compact('itemPedido', 'obras', 'pedido' ));
 
     }
 
@@ -52,16 +49,16 @@ class EnderecosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(endereco $endereco)
+    public function store(itemPedido $itemPedido)
     {
 
         $data = $this->validateRequest();
 
-       $endereco = Endereco::create($data);
+       $itemPedido = itemPedido::create($data);
 
-        \Session::flash('mensagem_sucesso','endereco cadastrado com sucesso');
+        \Session::flash('mensagem_sucesso','itemPedido cadastrado com sucesso');
 
-        return Redirect('enderecos/create');
+        return Redirect('itemPedidos/create');
     }
 
     /**
@@ -70,16 +67,16 @@ class EnderecosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(endereco $endereco)
+    public function show(itemPedido $itemPedido)
     {
 
         $user_login_id = auth()->user()->id;
         $user = auth()->user();
 
-        $enderecos= Endereco::where('user_id', $user_login_id)->get();
+        $itemPedidos= itemPedido::where('user_id', $user_login_id)->get();
 
 
-        return view('enderecos.show', compact('endereco' ));
+        return view('itemPedidos.show', compact('itemPedido' ));
 
 
 
@@ -91,12 +88,12 @@ class EnderecosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(endereco $endereco) {
+    public function edit(itemPedido $itemPedido) {
 
         $user = auth()->user();
 
 
-        return view('enderecos.edit',['endereco' => $endereco],['user' => $user]);
+        return view('itemPedidos.edit',['itemPedido' => $itemPedido],['user' => $user]);
     }
 
     /**
@@ -106,14 +103,14 @@ class EnderecosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(endereco $endereco)
+    public function update(itemPedido $itemPedido)
     {
 
         $data = $this->validateRequest();
 
-        $endereco -> update($data);
+        $itemPedido -> update($data);
 
-        return redirect('/enderecos');
+        return redirect('/itemPedidos');
 
     }
 
@@ -123,11 +120,11 @@ class EnderecosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(endereco $endereco)
+    public function destroy(itemPedido $itemPedido)
     {
-        $endereco->delete();
+        $itemPedido->delete();
 
-        return redirect('enderecos');
+        return redirect('itemPedidos');
     }
 
     private function validateRequest()
@@ -135,18 +132,13 @@ class EnderecosController extends Controller
 
         return request()->validate([
 
-        'cep' => 'required',
-        'rua' => 'required',
-        'numero' => 'required',
-        'complemento' => 'required',
-        'bairro' => 'required',
-        'cidade' => 'required',
-        'estado' => 'required',
-        'pais' => 'required',
-       'user_id' => 'required'
+
+            'valor_unitario' => 'required',
+            'quantidade' => 'required',
+            'pedido_id' => 'required',
+            'obra_id' => 'required',
 
        ]);
-
 
     }
 }

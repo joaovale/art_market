@@ -13,15 +13,9 @@ class Telefone extends Model
 
 ];
 
-// public function user()
-//     {
-//         return $this -> belongsTo(user::class);
-//     }
-
-
 public function users()
     {
-        return $this -> belongsToMany(User::class);
+        return $this -> belongsTo(User::class);
     }
 
 }
